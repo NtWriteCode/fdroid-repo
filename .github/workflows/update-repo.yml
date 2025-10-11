@@ -1,0 +1,117 @@
+name: Update F-Droid Repository
+
+on:
+  # Run daily at 2 AM UTC
+  schedule:
+    - cron: '0 2 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  update-fdroid-repo:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            apksigner \
+            libarchive-tools
+      
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pyyaml requests fdroidserver
+      
+      - name: Make fetch script executable
+        run: chmod +x scripts/fetch-apks.py
+      
+      - name: Restore keystore from secrets
+        run: |
+          if [ -n "${{ secrets.KEYSTORE_BASE64 }}" ]; then
+            echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.p12
+            echo "✓ Keystore restored from secrets"
+          else
+            echo "⚠️ KEYSTORE_BASE64 secret not found - creating new keystore"
+            fdroid update --create-key
+          fi
+      
+      - name: Configure keystore passwords from secrets
+        run: |
+          if [ -n "${{ secrets.KEYSTORE_PASSWORD }}" ]; then
+            # Override passwords from secrets if provided
+            sed -i "s/^keystorepass:.*/keystorepass: ${{ secrets.KEYSTORE_PASSWORD }}/" config.yml
+            sed -i "s/^keypass:.*/keypass: ${{ secrets.KEYSTORE_PASSWORD }}/" config.yml
+            echo "✓ Using keystore passwords from secrets"
+          else
+            echo "ℹ️ Using keystore passwords from config.yml"
+          fi
+      
+      - name: Fetch latest APKs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/fetch-apks.py
+        continue-on-error: false
+      
+      - name: Update F-Droid repository
+        run: |
+          fdroid update --create-metadata --verbose
+        continue-on-error: false
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "📝 Changes detected"
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "✓ No changes to commit"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add repo/ metadata/ index-v1.json index-v2.json index.xml entry.jar
+          git commit -m "🤖 Update F-Droid repository - $(date +'%Y-%m-%d %H:%M:%S UTC')" || exit 0
+          git push
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "### F-Droid Repository Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
+            echo "✅ Repository updated with new APKs" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No new APKs found" >> $GITHUB_STEP_SUMMARY
+          fi
+

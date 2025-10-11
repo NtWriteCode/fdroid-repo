@@ -1,0 +1,45 @@
+# Configuration file for apps to track in this F-Droid repository
+# Add your GitHub repositories here to automatically fetch their latest APK releases
+
+apps:
+  - github_repo: NtWriteCode/flowcontroller
+    package_name: com.ntwritecode.flowcontroller
+    app_name: "Flow Controller"
+    summary: "Control your Windows/Linux PC remotely from your Android phone"
+    description: |
+      Flow Controller is a two-component remote control system that lets you control 
+      your computer from anywhere in your home network.
+      
+      Features:
+      • Gesture Control - Swipe for arrow keys, tap for Enter, double-tap for ESC
+      • System Keyboard - Use your favorite mobile keyboard for instant text input
+      • Volume Control - Dedicated buttons with real-time percentage display
+      • Wake-on-LAN - Automatically wake sleeping computers with any gesture
+      • Live Monitoring - Real-time connection status with ping measurement
+      • High Performance - Instant response, 10+ gestures per second
+      • Secure - Token-based authentication with automatic MAC discovery
+      
+      Perfect for media centers, presentations, or casual PC control from your couch.
+    author: "NtWriteCode"
+    license: "Unknown"
+    categories:
+      - System
+      - Utilities
+    
+  # Add more repositories here following the same format
+  # - github_repo: username/another-app
+  #   package_name: com.example.otherapp
+  #   app_name: "App Name"
+  #   summary: "Short description"
+  #   description: |
+  #     Longer description here.
+  #   author: "Author Name"
+  #   license: "MIT"
+  #   categories:
+  #     - Utilities
+
+# Available category options:
+# Connectivity, Development, Games, Graphics, Internet, Money, Multimedia,
+# Navigation, Phone & SMS, Reading, Science & Education, Security, Sports & Health,
+# System, Theming, Time, Writing
+
