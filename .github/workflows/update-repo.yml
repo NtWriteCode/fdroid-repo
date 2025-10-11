@@ -96,9 +96,20 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "🤖 Update F-Droid repository - $(date +'%Y-%m-%d %H:%M:%S UTC')" || exit 0
-          git push
+          
+          # Restore config.yml to avoid committing real passwords
+          git checkout config.yml
+          
+          # Add only the files we want to commit
+          git add repo/ metadata/ index*.json index*.xml entry.jar 2>/dev/null || true
+          
+          # Check if there are actually staged changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit after excluding config.yml"
+          else
+            git commit -m "🤖 Update F-Droid repository - $(date +'%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          fi
       
       - name: Summary
         if: always()

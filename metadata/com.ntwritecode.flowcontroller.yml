@@ -1,0 +1,21 @@
+Categories:
+- System
+- Utilities
+License: Unknown
+AuthorName: NtWriteCode
+AuthorWebSite: https://github.com/NtWriteCode/flowcontroller
+SourceCode: https://github.com/NtWriteCode/flowcontroller
+IssueTracker: https://github.com/NtWriteCode/flowcontroller/issues
+Summary: Control your Windows/Linux PC remotely from your Android phone
+Description: "Flow Controller is a two-component remote control system that lets you\
+  \ control \nyour computer from anywhere in your home network.\n\nFeatures:\n\u2022\
+  \ Gesture Control - Swipe for arrow keys, tap for Enter, double-tap for ESC\n\u2022\
+  \ System Keyboard - Use your favorite mobile keyboard for instant text input\n\u2022\
+  \ Volume Control - Dedicated buttons with real-time percentage display\n\u2022 Wake-on-LAN\
+  \ - Automatically wake sleeping computers with any gesture\n\u2022 Live Monitoring\
+  \ - Real-time connection status with ping measurement\n\u2022 High Performance -\
+  \ Instant response, 10+ gestures per second\n\u2022 Secure - Token-based authentication\
+  \ with automatic MAC discovery\n\nPerfect for media centers, presentations, or casual\
+  \ PC control from your couch.\n"
+Name: Flow Controller
+AutoName: Flow Controller
