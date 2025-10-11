@@ -27,7 +27,7 @@ apps:
       - Utilities
     
   # Add more repositories here following the same format
-  # - github_repo: username/another-app
+  # - github_repo: NtWriteCode/another-app
   #   package_name: com.example.otherapp
   #   app_name: "App Name"
   #   summary: "Short description"

@@ -50,14 +50,13 @@ sdk_path: /usr/lib/android-sdk
 
 # Canonical URL of the repositoy, needs to end in /repo. Is is used to identity
 # the repo in the client, as well.
-# TODO: Replace 'username' with your GitHub username
-repo_url: https://username.github.io/fdroid-repo/repo
+repo_url: https://ntwritecode.github.io/fdroid-repo/repo
 
 # Base URL for per-package pages on the website of this repo,
 # i.e. https://f-droid.org/packages/<appid>/ This should be accessible
 # with a browser. Setting it to null or not setting this disables the
 # feature.
-# repo_web_base_url: https://username.github.io/fdroid-repo/packages/
+# repo_web_base_url: https://ntwritecode.github.io/fdroid-repo/packages/
 
 repo_name: My Cool Apps Collection
 repo_description: >-
