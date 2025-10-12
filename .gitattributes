@@ -1,7 +1,6 @@
 # Git LFS - Track large binary files
 *.apk filter=lfs diff=lfs merge=lfs -text
 *.jar filter=lfs diff=lfs merge=lfs -text
-
 # Also track other large F-Droid files
 repo/*.apk filter=lfs diff=lfs merge=lfs -text
 repo/*.jar filter=lfs diff=lfs merge=lfs -text
