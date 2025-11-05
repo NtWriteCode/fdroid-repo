@@ -1,0 +1,45 @@
+name: Update F-Droid Index
+
+on:
+  push:
+    branches:
+      - main  # Or master, depending on your default
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Set up F-Droid server tools
+        uses: docker://registry.f-droid.org/f-droid/server
+        with:
+          entrypoint: /bin/bash
+          args: |
+            # Download the keystore from GitHub Secrets
+            echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks
+            
+            # Run the update command
+            fdroid update --create-metadata \
+              --keystore keystore.jks \
+              --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
+              --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
+              --keypass '${{ secrets.FDROID_KEY_PASS }}'
+            
+            # Clean up the key
+            rm keystore.jks
+
+      - name: Commit and push new index
+        run: |
+          git config --global user.name "F-Droid Bot"
+          git config --global user.email "bot@example.com"
+          git add index.* repo/
+          if ! git diff --staged --quiet; then
+            git commit -m "Update F-Droid index"
+            git push
+          else
+            echo "No changes to index."
+          fi
