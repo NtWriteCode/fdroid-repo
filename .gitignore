@@ -1,1 +1,5 @@
-fdroid.keystore
+repo/*.apk
+repo/*.apk.asc
+repo/*.apk.idsig
+*.jks
+url_mapping.json

@@ -14,6 +14,17 @@ jobs:
         with:
           fetch-depth: 0 
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Fetch APKs
+        run: |
+          python3 scripts/fetch_apks.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Set up F-Droid server tools
         uses: docker://registry.f-droid.org/f-droid/server
         with:
@@ -23,17 +34,34 @@ jobs:
             echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks
             
             # Run the update command
-            fdroid update --create-metadata \
+            # We use --nosign for the repo itself if we don't have a signing key for the repo index yet,
+            # but usually we want to sign the index.
+            # The user mentioned "automatically building and signing the APKs", so the APKs are signed.
+            # The repo index also needs to be signed.
+            
+            fdroid update --create-metadata --pretty \
               --keystore keystore.jks \
               --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
               --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
               --keypass '${{ secrets.FDROID_KEY_PASS }}'
             
+            # Patch the index to use external URLs
+            python3 scripts/patch_index.py
+
+            # Sign the patched index
+            fdroid signindex --keystore keystore.jks \
+              --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
+              --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
+              --keypass '${{ secrets.FDROID_KEY_PASS }}'
+
             # Clean up the key
             rm keystore.jks
 
       - name: Commit and push new index
         run: |
+          # Remove APKs so they are not committed
+          rm -f repo/*.apk
+          
           git config --global user.name "F-Droid Bot"
           git config --global user.email "bot@example.com"
           git add index.* repo/
