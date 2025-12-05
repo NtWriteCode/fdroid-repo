@@ -3,7 +3,8 @@ name: Update F-Droid Index
 on:
   push:
     branches:
-      - main  # Or master, depending on your default
+      - main
+  workflow_dispatch:
 
 jobs:
   update:
@@ -19,26 +20,20 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Fetch APKs
+      - name: Fetch APKs from releases
         run: |
           python3 scripts/fetch_apks.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up F-Droid server tools
-        uses: docker://registry.f-droid.org/f-droid/server
+        uses: docker://registry.gitlab.com/fdroid/docker-executable-fdroidserver:latest
         with:
-          entrypoint: /bin/bash
           args: |
             # Download the keystore from GitHub Secrets
             echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks
             
             # Run the update command
-            # We use --nosign for the repo itself if we don't have a signing key for the repo index yet,
-            # but usually we want to sign the index.
-            # The user mentioned "automatically building and signing the APKs", so the APKs are signed.
-            # The repo index also needs to be signed.
-            
             fdroid update --create-metadata --pretty \
               --keystore keystore.jks \
               --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
@@ -64,7 +59,7 @@ jobs:
           
           git config --global user.name "F-Droid Bot"
           git config --global user.email "bot@example.com"
-          git add index.* repo/
+          git add index.* repo/ metadata/
           if ! git diff --staged --quiet; then
             git commit -m "Update F-Droid index"
             git push

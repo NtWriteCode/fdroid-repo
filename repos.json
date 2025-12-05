@@ -1,4 +1,5 @@
 [
     "NtWriteCode/flowcontroller",
-    "NtWriteCode/Pockard"
+    "NtWriteCode/Pockard",
+    "NtWriteCode/service-tracker"
 ]
