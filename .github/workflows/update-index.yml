@@ -20,16 +20,11 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Cache APT packages
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: fdroidserver apksigner
-          version: 1.0
-
       - name: Install F-Droid server tools
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y fdroidserver apksigner
+          sudo apt-get install -y apksigner
+          pip3 install fdroidserver
 
       - name: Fetch APKs from releases
         run: |
