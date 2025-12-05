@@ -29,28 +29,7 @@ jobs:
       - name: Set up F-Droid server tools
         uses: docker://registry.gitlab.com/fdroid/docker-executable-fdroidserver:latest
         with:
-          args: |
-            # Download the keystore from GitHub Secrets
-            echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks
-            
-            # Run the update command
-            fdroid update --create-metadata --pretty \
-              --keystore keystore.jks \
-              --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
-              --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
-              --keypass '${{ secrets.FDROID_KEY_PASS }}'
-            
-            # Patch the index to use external URLs
-            python3 scripts/patch_index.py
-
-            # Sign the patched index
-            fdroid signindex --keystore keystore.jks \
-              --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
-              --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
-              --keypass '${{ secrets.FDROID_KEY_PASS }}'
-
-            # Clean up the key
-            rm keystore.jks
+          args: bash -c "echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks && fdroid update --create-metadata --pretty --keystore keystore.jks --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' --keypass '${{ secrets.FDROID_KEY_PASS }}' && python3 scripts/patch_index.py && fdroid signindex --keystore keystore.jks --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' --keypass '${{ secrets.FDROID_KEY_PASS }}' && rm keystore.jks"
 
       - name: Commit and push new index
         run: |
