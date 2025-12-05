@@ -11,14 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0 
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
+
+      - name: Cache APT packages
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: fdroidserver apksigner
+          version: 1.0
 
       - name: Install F-Droid server tools
         run: |
@@ -31,17 +37,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Decode keystore
+      - name: Configure keystore
         run: |
           echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks
+          # Add keystore config to config.yml
+          cat >> config.yml << EOF
+          keystore: keystore.jks
+          repo_keyalias: ${{ secrets.FDROID_KEY_ALIAS }}
+          keystorepass: ${{ secrets.FDROID_KEYSTORE_PASS }}
+          keypass: ${{ secrets.FDROID_KEY_PASS }}
+          EOF
 
       - name: Run F-Droid update
         run: |
-          fdroid update --create-metadata --pretty \
-            --keystore keystore.jks \
-            --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
-            --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
-            --keypass '${{ secrets.FDROID_KEY_PASS }}'
+          fdroid update --create-metadata --pretty
 
       - name: Patch index with external URLs
         run: |
@@ -49,14 +58,13 @@ jobs:
 
       - name: Sign the patched index
         run: |
-          fdroid signindex --keystore keystore.jks \
-            --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
-            --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
-            --keypass '${{ secrets.FDROID_KEY_PASS }}'
+          fdroid signindex
 
       - name: Clean up keystore
         run: |
           rm keystore.jks
+          # Remove keystore config from config.yml
+          git checkout config.yml
 
       - name: Commit and push new index
         run: |
