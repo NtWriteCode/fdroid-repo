@@ -68,7 +68,13 @@ jobs:
           
           git config --global user.name "F-Droid Bot"
           git config --global user.email "bot@example.com"
-          git add index.* repo/ metadata/
+          
+          # Add files that exist
+          git add repo/ metadata/ || true
+          [ -f index.xml ] && git add index.xml || true
+          [ -f index-v1.json ] && git add index-v1.json || true
+          [ -f index-v2.json ] && git add index-v2.json || true
+          
           if ! git diff --staged --quiet; then
             git commit -m "Update F-Droid index"
             git push
