@@ -20,16 +20,43 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install F-Droid server tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fdroidserver apksigner
+
       - name: Fetch APKs from releases
         run: |
           python3 scripts/fetch_apks.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up F-Droid server tools
-        uses: docker://registry.gitlab.com/fdroid/docker-executable-fdroidserver:latest
-        with:
-          args: bash -c "echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks && fdroid update --create-metadata --pretty --keystore keystore.jks --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' --keypass '${{ secrets.FDROID_KEY_PASS }}' && python3 scripts/patch_index.py && fdroid signindex --keystore keystore.jks --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' --keypass '${{ secrets.FDROID_KEY_PASS }}' && rm keystore.jks"
+      - name: Decode keystore
+        run: |
+          echo '${{ secrets.FDROID_KEYSTORE_B64 }}' | base64 -d > keystore.jks
+
+      - name: Run F-Droid update
+        run: |
+          fdroid update --create-metadata --pretty \
+            --keystore keystore.jks \
+            --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
+            --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
+            --keypass '${{ secrets.FDROID_KEY_PASS }}'
+
+      - name: Patch index with external URLs
+        run: |
+          python3 scripts/patch_index.py
+
+      - name: Sign the patched index
+        run: |
+          fdroid signindex --keystore keystore.jks \
+            --keyalias '${{ secrets.FDROID_KEY_ALIAS }}' \
+            --storepass '${{ secrets.FDROID_KEYSTORE_PASS }}' \
+            --keypass '${{ secrets.FDROID_KEY_PASS }}'
+
+      - name: Clean up keystore
+        run: |
+          rm keystore.jks
 
       - name: Commit and push new index
         run: |
