@@ -1,0 +1,178 @@
+{
+  "repo": {
+    "timestamp": 1764978184000,
+    "version": 20002,
+    "name": "NtWriteCode F-Droid Repo",
+    "icon": "fdroid-icon.png",
+    "address": "https://ntwritecode.github.io/fdroid-repo/repo",
+    "description": "A repository of my apps for friends."
+  },
+  "requests": {
+    "install": [],
+    "uninstall": []
+  },
+  "apps": [
+    {
+      "categories": [
+        "fdroid-repo"
+      ],
+      "suggestedVersionCode": "2147483647",
+      "license": "Unknown",
+      "name": "Flow Controller",
+      "added": 1764978183000,
+      "packageName": "com.ntwritecode.flowcontroller",
+      "lastUpdated": 1764978183000
+    },
+    {
+      "categories": [
+        "fdroid-repo"
+      ],
+      "suggestedVersionCode": "2147483647",
+      "license": "Unknown",
+      "name": "Pockard",
+      "added": 1764978183000,
+      "packageName": "com.ntwritecode.pockard",
+      "lastUpdated": 1764978183000
+    },
+    {
+      "categories": [
+        "fdroid-repo"
+      ],
+      "suggestedVersionCode": "2147483647",
+      "license": "Unknown",
+      "name": "Service Tracker",
+      "added": 1764978184000,
+      "packageName": "com.ntwritecode.service_tracker",
+      "lastUpdated": 1764978184000
+    }
+  ],
+  "packages": {
+    "com.ntwritecode.flowcontroller": [
+      {
+        "added": 1764978183000,
+        "apkName": "https://github.com/NtWriteCode/flowcontroller/releases/download/v1.0.3/flowcontroller-1.0.3-arm64-v8a.apk",
+        "hash": "f6068453466ce1b6893fceb88609fc9d9ede0944169ba6b39e1e8b80b9a967ad",
+        "hashType": "sha256",
+        "minSdkVersion": 24,
+        "nativecode": [
+          "arm64-v8a"
+        ],
+        "packageName": "com.ntwritecode.flowcontroller",
+        "sig": "55be689f9695b5e1fd823b3a0fad5c6f",
+        "signer": "17275535be2f30bdcd02b79b6bdd68e08b623596dd6d2af3feba15cb2decb22c",
+        "size": 24550222,
+        "targetSdkVersion": 36,
+        "uses-permission": [
+          [
+            "android.permission.INTERNET",
+            null
+          ],
+          [
+            "android.permission.ACCESS_NETWORK_STATE",
+            null
+          ],
+          [
+            "android.permission.ACCESS_WIFI_STATE",
+            null
+          ],
+          [
+            "android.permission.CAMERA",
+            null
+          ],
+          [
+            "com.ntwritecode.flowcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+            null
+          ]
+        ],
+        "versionCode": 2002,
+        "versionName": "1.0.3"
+      }
+    ],
+    "com.ntwritecode.pockard": [
+      {
+        "added": 1764978183000,
+        "apkName": "https://github.com/NtWriteCode/Pockard/releases/download/v1.3.0/pockard-v1.3.0-arm64-v8a.apk",
+        "hash": "ae561567b10cb6b006f5b4c8ce3ef0283aa6cf715e3d56163c831bee4bedaa65",
+        "hashType": "sha256",
+        "minSdkVersion": 24,
+        "nativecode": [
+          "arm64-v8a"
+        ],
+        "packageName": "com.ntwritecode.pockard",
+        "sig": "5aef36b305dba58999199ab2c9948a18",
+        "signer": "a7a1f05e69873583feabc7f21ce2b0bdfab19e7c64ac94a073875d5702151820",
+        "size": 31951927,
+        "targetSdkVersion": 36,
+        "uses-permission": [
+          [
+            "android.permission.CAMERA",
+            null
+          ],
+          [
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            28
+          ],
+          [
+            "android.permission.READ_EXTERNAL_STORAGE",
+            32
+          ],
+          [
+            "android.permission.READ_MEDIA_IMAGES",
+            null
+          ],
+          [
+            "android.permission.INTERNET",
+            null
+          ],
+          [
+            "com.ntwritecode.pockard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_NETWORK_STATE",
+            null
+          ]
+        ],
+        "versionCode": 2002,
+        "versionName": "1.3.0"
+      }
+    ],
+    "com.ntwritecode.service_tracker": [
+      {
+        "added": 1764978184000,
+        "apkName": "https://github.com/NtWriteCode/service-tracker/releases/download/v0.0.1/service-tracker-v0.0.1-arm64-v8a.apk",
+        "hash": "64527d17b5a3be0bf6ef470211df48f1afa1c9b2b79f08797d828bbea00e4e45",
+        "hashType": "sha256",
+        "minSdkVersion": 24,
+        "nativecode": [
+          "arm64-v8a"
+        ],
+        "packageName": "com.ntwritecode.service_tracker",
+        "sig": "e959ffc492ed11a7f744a0188d49a964",
+        "signer": "2c23bc11f761290a6ac1cebfd38c7428379c3b499137950f1af7d157b5b3a3ef",
+        "size": 43108206,
+        "targetSdkVersion": 36,
+        "uses-permission": [
+          [
+            "android.permission.INTERNET",
+            null
+          ],
+          [
+            "android.permission.ACCESS_FINE_LOCATION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_COARSE_LOCATION",
+            null
+          ],
+          [
+            "com.ntwritecode.service_tracker.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+            null
+          ]
+        ],
+        "versionCode": 2001,
+        "versionName": "1.0.0"
+      }
+    ]
+  }
+}

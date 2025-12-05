@@ -1,0 +1,50 @@
+{
+  "/etc/issue.net": "Ubuntu 24.04.3 LTS",
+  "antiFeatures": {},
+  "apksigner": "/usr/bin/apksigner",
+  "archivePolicy0": [],
+  "commandLine": [
+    "/opt/hostedtoolcache/Python/3.14.0/x64/bin/fdroid update",
+    "--create-metadata",
+    "--pretty"
+  ],
+  "disabled": [],
+  "endTimestamp": 1764978187441,
+  "failedBuilds": {},
+  "fdroiddata": {
+    "commitId": "99f76b72649b0f3fe83bd647e614c5cbd8bcf63f",
+    "isDirty": true,
+    "modifiedFiles": [
+      "config.yml"
+    ],
+    "untrackedFiles": []
+  },
+  "jarsigner": "/usr/bin/jarsigner",
+  "keytool": "/usr/bin/keytool",
+  "needsUpdate": [
+    "com.ntwritecode.flowcontroller",
+    "com.ntwritecode.pockard",
+    "com.ntwritecode.service_tracker"
+  ],
+  "noPackages": [
+    "com.ntwritecode.flowcontroller",
+    "com.ntwritecode.pockard",
+    "com.ntwritecode.service_tracker"
+  ],
+  "noUpdateCheck": [
+    "com.ntwritecode.flowcontroller",
+    "com.ntwritecode.pockard",
+    "com.ntwritecode.service_tracker"
+  ],
+  "stages": {
+    "delete_disabled_builds": 1764978180978,
+    "index.make repo": 1764978184164,
+    "prepare_apps repo": 1764978184163,
+    "process_apks": 1764978180978,
+    "read_added_date_from_all_apks": 1764978184162,
+    "remove_apks": 1764978184152,
+    "scan_repo_files": 1764978184152
+  },
+  "startTimestamp": 1764978180000,
+  "subcommand": "update"
+}

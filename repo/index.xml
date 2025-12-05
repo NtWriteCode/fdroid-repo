@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fdroid>
+	<repo icon="fdroid-icon.png" name="NtWriteCode F-Droid Repo" pubkey="3082038c30820274a003020102020900d8ccb78bc939340a300d06092a864886f70d01010c05003073310b30090603550406130248553110300e0603550408130748756e676172793110300e0603550407130748756e6761727931143012060355040a130b4e745772697465436f646531143012060355040b130b4e745772697465436f6465311430120603550403130b4e745772697465436f64653020170d3235313130353037333831355a180f32303533303332333037333831355a3073310b30090603550406130248553110300e0603550408130748756e676172793110300e0603550407130748756e6761727931143012060355040a130b4e745772697465436f646531143012060355040b130b4e745772697465436f6465311430120603550403130b4e745772697465436f646530820122300d06092a864886f70d01010105000382010f003082010a0282010100da4f79a9f6d632b3bf99e9fb82ff673788ef243e332f8f7d73833db2f633af9c7acc4de703adfd6459204b535ef71c98f66bc1e98c1ada105543ada166471fad884b2b47d5cc5256da14b44b8f2d153e8f5e605700b4f5d3da87ac87ed25c08788d5fd1cc8e9ef1ee7e7c337eb795deb8766f60479b49cd26fec11ac125e86fcd04478dcf1159cbe02cc375127a58b88d4195542ed300242ca5d4731a37d4d4da548b75904582c14378c79b65f6c0b4108a590b9e4fdd938f24fdc5098e1233ec03126b0241f87d73f0c5ee4fb68272502a6cc8492dfe2d137dc0d3f3439797baff23964dd55dd96ae5b1b87407eff70eb747f89d9c9fea05b526d368235e0a90203010001a321301f301d0603551d0e04160414c9ef7a1d40af9ef482c45140a42c9ca1b7098287300d06092a864886f70d01010c05000382010100168ac209d4942fc65f93242278a8c01dc20bfdd5ac40ddacca239545cbc3d0ac2740e5b033135e4e4fcd426424499eca2cb9a8db7afca3c97f646fbd1bffa39dd0a60026aa1d2de62c7202f67f4af6bee931944a28b3232b163ad64afeebaa6bebdf11ca1061a93e8ec8db1274bf3518c53d7d26b6a6d637e09cbd0b2f88b3de6c4099ad778b9783600ee916afb4738926cbfd9b74993008396cf8427435b0da72a9eb028e050e2e55e67339e3d0ab5fe81fa3e7f66ac8dff6d4e4e7607850bfc05d643eb0be5709eeda04fc948394cccc25cb7f56680d14db8326aef0c76dab0ff8c3bc6ef1363a40b34d20051c39c0875bfc2358bda456ca7bbcd67d88af23" timestamp="1764978184" url="https://ntwritecode.github.io/fdroid-repo/repo" version="20002">
+		<description>A repository of my apps for friends.</description>
+	</repo>
+	<application id="com.ntwritecode.flowcontroller">
+		<id>com.ntwritecode.flowcontroller</id>
+		<added>2025-12-05</added>
+		<lastupdated>2025-12-05</lastupdated>
+		<name>Flow Controller</name>
+		<summary></summary>
+		<desc>No description available</desc>
+		<license>Unknown</license>
+		<categories>fdroid-repo</categories>
+		<category>fdroid-repo</category>
+		<web></web>
+		<source></source>
+		<tracker></tracker>
+		<marketversion></marketversion>
+		<marketvercode>2147483647</marketvercode>
+		<package>
+			<version>1.0.3</version>
+			<versioncode>2002</versioncode>
+			<apkname>flowcontroller-1.0.3-arm64-v8a.apk</apkname>
+			<hash type="sha256">f6068453466ce1b6893fceb88609fc9d9ede0944169ba6b39e1e8b80b9a967ad</hash>
+			<size>24550222</size>
+			<sdkver>24</sdkver>
+			<targetSdkVersion>36</targetSdkVersion>
+			<added>2025-12-05</added>
+			<sig>55be689f9695b5e1fd823b3a0fad5c6f</sig>
+			<permissions>ACCESS_NETWORK_STATE,ACCESS_WIFI_STATE,CAMERA,INTERNET,com.ntwritecode.flowcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</permissions>
+			<nativecode>arm64-v8a</nativecode>
+		</package>
+	</application>
+	<application id="com.ntwritecode.pockard">
+		<id>com.ntwritecode.pockard</id>
+		<added>2025-12-05</added>
+		<lastupdated>2025-12-05</lastupdated>
+		<name>Pockard</name>
+		<summary></summary>
+		<desc>No description available</desc>
+		<license>Unknown</license>
+		<categories>fdroid-repo</categories>
+		<category>fdroid-repo</category>
+		<web></web>
+		<source></source>
+		<tracker></tracker>
+		<marketversion></marketversion>
+		<marketvercode>2147483647</marketvercode>
+		<package>
+			<version>1.3.0</version>
+			<versioncode>2002</versioncode>
+			<apkname>pockard-v1.3.0-arm64-v8a.apk</apkname>
+			<hash type="sha256">ae561567b10cb6b006f5b4c8ce3ef0283aa6cf715e3d56163c831bee4bedaa65</hash>
+			<size>31951927</size>
+			<sdkver>24</sdkver>
+			<targetSdkVersion>36</targetSdkVersion>
+			<added>2025-12-05</added>
+			<sig>5aef36b305dba58999199ab2c9948a18</sig>
+			<permissions>ACCESS_NETWORK_STATE,CAMERA,INTERNET,READ_EXTERNAL_STORAGE,READ_MEDIA_IMAGES,WRITE_EXTERNAL_STORAGE,com.ntwritecode.pockard.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</permissions>
+			<uses-permission maxSdkVersion="32" name="android.permission.READ_EXTERNAL_STORAGE"/>
+			<uses-permission maxSdkVersion="28" name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			<nativecode>arm64-v8a</nativecode>
+		</package>
+	</application>
+	<application id="com.ntwritecode.service_tracker">
+		<id>com.ntwritecode.service_tracker</id>
+		<added>2025-12-05</added>
+		<lastupdated>2025-12-05</lastupdated>
+		<name>Service Tracker</name>
+		<summary></summary>
+		<desc>No description available</desc>
+		<license>Unknown</license>
+		<categories>fdroid-repo</categories>
+		<category>fdroid-repo</category>
+		<web></web>
+		<source></source>
+		<tracker></tracker>
+		<marketversion></marketversion>
+		<marketvercode>2147483647</marketvercode>
+		<package>
+			<version>1.0.0</version>
+			<versioncode>2001</versioncode>
+			<apkname>service-tracker-v0.0.1-arm64-v8a.apk</apkname>
+			<hash type="sha256">64527d17b5a3be0bf6ef470211df48f1afa1c9b2b79f08797d828bbea00e4e45</hash>
+			<size>43108206</size>
+			<sdkver>24</sdkver>
+			<targetSdkVersion>36</targetSdkVersion>
+			<added>2025-12-05</added>
+			<sig>e959ffc492ed11a7f744a0188d49a964</sig>
+			<permissions>ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION,INTERNET,com.ntwritecode.service_tracker.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</permissions>
+			<nativecode>arm64-v8a</nativecode>
+		</package>
+	</application>
+</fdroid>
