@@ -1,0 +1,6 @@
+data/
+keystore.jks
+.env
+*.apk
+*.apk.asc
+*.apk.idsig
